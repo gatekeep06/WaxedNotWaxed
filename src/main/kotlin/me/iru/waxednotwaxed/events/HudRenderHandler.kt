@@ -8,12 +8,13 @@ import net.minecraft.block.OxidizableSlabBlock
 import net.minecraft.block.OxidizableStairsBlock
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext
+import net.minecraft.client.render.RenderTickCounter
 import net.minecraft.item.AxeItem
 import net.minecraft.util.Identifier
 
 class HudRenderHandler : HudRenderCallback {
 
-    override fun onHudRender(drawContext: DrawContext?, tickDelta: Float) {
+    override fun onHudRender(drawContext: DrawContext?, tickCounter: RenderTickCounter) {
         if(drawContext == null ||
             !WaxedNotWaxed.config.enabled ||
             (WaxedNotWaxed.config.onlyShowWhenHoldingAxe && MinecraftClient.getInstance().player!!.mainHandStack.item !is AxeItem)
@@ -36,7 +37,7 @@ class HudRenderHandler : HudRenderCallback {
             if(waxed) 0xf78204 else 0x09a073
         )
         drawContext.drawTexture(
-            Identifier("minecraft", if(waxed) "textures/item/honeycomb.png" else "textures/item/iron_axe.png"),
+            Identifier.of("minecraft", if(waxed) "textures/item/honeycomb.png" else "textures/item/iron_axe.png"),
             screenCenter.x.toInt() + 5,
             screenCenter.y.toInt() + 5,
             0.0f,

@@ -41,18 +41,22 @@ dependencies {
     modImplementation("blue.endless:jankson:1.2.2")
 }
 tasks {
-    val javaVersion = JavaVersion.VERSION_17
+    val javaVersion = JavaVersion.VERSION_21
     withType<JavaCompile> {
         options.encoding = "UTF-8"
         sourceCompatibility = javaVersion.toString()
         targetCompatibility = javaVersion.toString()
         options.release.set(javaVersion.toString().toInt())
     }
-    withType<KotlinCompile> {
-        kotlinOptions { jvmTarget = javaVersion.toString() }
-        sourceCompatibility = javaVersion.toString()
-        targetCompatibility = javaVersion.toString()
-    }
+    /**
+     * deprecated, as i understand
+     * i hope it doesn't break anything :clueless:
+    */
+//    withType<KotlinCompile> {
+//        kotlinOptions { jvmTarget = javaVersion.toString() }
+//        sourceCompatibility = javaVersion.toString()
+//        targetCompatibility = javaVersion.toString()
+//    }
     jar { from("LICENSE") { rename { "${it}_${base.archivesName}" } } }
     processResources {
         inputs.property("version", project.version)
